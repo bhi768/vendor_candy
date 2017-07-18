@@ -100,6 +100,11 @@ PRODUCT_COPY_FILES += \
     vendor/candy/prebuilt/common/bin/sysinit:system/bin/sysinit \
     vendor/candy/prebuilt/bin/clean_cache.sh:system/bin/clean_cache.sh
 
+# TWRP
+ifeq ($(WITH_TWRP),true)
+include vendor/cm/config/twrp.mk
+endif
+
 # Required packages
 PRODUCT_PACKAGES += \
     CellBroadcastReceiver \
