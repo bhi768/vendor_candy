@@ -1,26 +1,41 @@
-add_json_str_omitempty = $(if $(strip $(2)),$(call add_json_str, $(1), $(2)))
-
-_contents := $(_contents)    "Candy":{$(newline)
-
-# see build/core/soong_config.mk for the add_json_* functions you can use here
-$(call add_json_str_omitempty, Additional_gralloc_10_usage_bits, $(TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS))
-$(call add_json_bool, Has_legacy_camera_hal1,               $(filter true,$(TARGET_HAS_LEGACY_CAMERA_HAL1)))
-$(call add_json_bool, Needs_text_relocations,               $(filter true,$(TARGET_NEEDS_PLATFORM_TEXT_RELOCTIONS)))
-$(call add_json_str,  Specific_camera_parameter_library,    $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY))
-$(call add_json_bool, Uses_media_extensions,                $(TARGET_USES_MEDIA_EXTENSIONS))
-$(call add_json_str_omitempty, Target_specific_headers_include_dir, $(TARGET_SPECIFIC_HEADER_PATH))
-$(call add_json_bool, Device_support_hwfde, $(filter true,$(TARGET_HW_DISK_ENCRYPTION)))
-$(call add_json_bool, Device_support_hwfde_perf, $(filter true,$(TARGET_HW_DISK_ENCRYPTION_PERF)))
-$(call add_json_bool, Device_support_legacy_hwfde, $(filter true,$(TARGET_LEGACY_HW_DISK_ENCRYPTION)))
-$(call add_json_bool, Device_support_wait_for_qsee, $(filter true,$(TARGET_KEYMASTER_WAIT_FOR_QSEE)))
-$(call add_json_str_omitempty, Target_process_sdk_version_override, $(TARGET_PROCESS_SDK_VERSION_OVERRIDE))
-$(call add_json_str,  Target_shim_libs,                     $(TARGET_LD_SHIM_LIBS))
-$(call add_json_bool, Uses_generic_camera_parameter_library, $(if $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY),,true))
-$(call add_json_bool, Uses_nvidia_enhancements,             $(filter TRUE,$(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)))
-$(call add_json_bool, Uses_qcom_bsp_legacy,                 $(filter true,$(TARGET_USES_QCOM_BSP_LEGACY)))
-$(call add_json_bool, Uses_qti_camera_device,               $(filter true,$(TARGET_USES_QTI_CAMERA_DEVICE)))
-
-# This causes the build system to strip out the last comma in our nested struct, to keep the JSON valid.
-_contents := $(_contents)__SV_END
-
-_contents := $(_contents)    },$(newline)
+# Insert new variables inside the Aosip structure
+candy_soong:
+	$(hide) mkdir -p $(dir $@)
+	$(hide) (\
+	echo '{'; \
+	echo '"Candy": {'; \
+	echo '    "Has_legacy_camera_hal1": $(if $(filter true,$(TARGET_HAS_LEGACY_CAMERA_HAL1)),true,false),'; \
+	echo '    "Uses_media_extensions": $(if $(filter true,$(TARGET_USES_MEDIA_EXTENSIONS)),true,false),'; \
+	echo '    "Uses_generic_camera_parameter_library": $(if $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY),false,true),'; \
+	echo '    "Specific_camera_parameter_library": "$(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY)",'; \
+	echo '    "Needs_text_relocations": $(if $(filter true,$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS)),true,false),'; \
+	echo '    "Cant_reallocate_omx_buffers":  $(if $(filter omap4,$(TARGET_BOARD_PLATFORM)),true,false),'; \
+	echo '    "Qcom_bsp_legacy":  $(if $(filter msm7x27a msm7x30 msm8660 msm8960,$(TARGET_BOARD_PLATFORM)),true,false),'; \
+	echo '    "Qti_flac_decoder":  $(if $(strip $(AUDIO_FEATURE_ENABLED_EXTN_FLAC_DECODER)),true,false),';  \
+	echo '    "Use_legacy_rescaling":  $(if $(strip $(TARGET_OMX_LEGACY_RESCALING)),true,false),';  \
+	echo '    "BoardUsesQTIHardware":  $(if $(BOARD_USES_QTI_HARDWARE),true,false),'; \
+	echo '    "Libart_img_base": "$(LIBART_IMG_BASE)",'; \
+	echo '    "QTIAudioPath":  "$(call project-path-for,qcom-audio)",'; \
+	echo '    "QTIDisplayPath":  "$(call project-path-for,qcom-display)",'; \
+	echo '    "QTIMediaPath":  "$(call project-path-for,qcom-media)",';  \
+	echo '    "Uses_non_treble_camera": $(if $(filter true,$(TARGET_USES_NON_TREBLE_CAMERA)),true,false),'; \
+	echo '    "BTVendorPath": "$(call project-path-for,bt-vendor)",'; \
+	echo '    "RILPath": "$(call project-path-for,ril)",'; \
+	echo '    "WLANPath": "$(call project-path-for,wlan)"'; \
+	echo '},'; \
+	echo '"Qualcomm": {'; \
+	echo '    "BoardUsesQTIHardware": $(if $(filter true,$(BOARD_USES_QTI_HARDWARE)),true,false),'; \
+	echo '    "BoardUsesQCOMHardware": $(if $(filter true,$(BOARD_USES_QCOM_HARDWARE)),true,false),'; \
+	echo '    "TargetUsesQCOMBsp": $(if $(filter true,$(TARGET_USES_QCOM_BSP)),true,false),'; \
+	echo '    "TargetUsesQCOMLegacyBsp": $(if $(filter true,$(TARGET_USES_QCOM_LEGACY_BSP)),true,false),'; \
+	echo '    "BoardUsesLegacyAlsa": $(if $(filter true,$(BOARD_USES_LEGACY_ALSA_AUDIO)),true,false),'; \
+	echo '    "QCOMAudioPath": "$(call project-path-for,qcom-audio)",'; \
+	echo '    "QCOMCameraPath": "$(call project-path-for,qcom-camera)",'; \
+	echo '    "QCOMDataservicesPath": "$(call project-path-for,qcom-dataservices)",';  \
+	echo '    "QCOMDisplayPath": "$(call project-path-for,qcom-display)",';  \
+	echo '    "QCOMGPSPath": "$(call project-path-for,qcom-gps)",';  \
+	echo '    "QCOMMediaPath": "$(call project-path-for,qcom-media)",';  \
+	echo '    "QCOMSensorsPath": "$(call project-path-for,qcom-sensors)",';  \
+	echo '    "Uses_qcom_bsp_legacy": $(if $(filter true,$(TARGET_USES_QCOM_BSP_LEGACY)),true,false)'; \
+	echo '},'; \
+	echo '') > $(SOONG_VARIABLES_TMP)
