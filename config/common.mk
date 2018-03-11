@@ -132,8 +132,9 @@ PRODUCT_PACKAGES += \
     CandyBootAnimation \
     CandyWrappers \
     LatinIME \
-    BluetoothExt
-
+    BluetoothExt \
+    Camera2 \
+    Calender
 
 # Extra tools
 PRODUCT_PACKAGES += \
