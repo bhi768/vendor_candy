@@ -137,7 +137,6 @@ PRODUCT_PACKAGES += \
     LatinIME \
     BluetoothExt
 
-
 # Extra tools
 PRODUCT_PACKAGES += \
     openvpn \
@@ -151,6 +150,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     charger_res_images
+
+# Fonts
+PRODUCT_PACKAGES += \
+    DU-Fonts
 
 # DU Utils library
 PRODUCT_BOOT_JARS += \
