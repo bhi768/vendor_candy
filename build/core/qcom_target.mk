@@ -54,6 +54,12 @@ ifeq ($(BOARD_USES_QTI_HARDWARE),true)
         qcom_flags += -DHAS_EXTRA_FLAC_METADATA
     endif
 
+    # Enable media extensions
+    TARGET_USES_MEDIA_EXTENSIONS := true
+
+    # Allow building audio encoders
+    TARGET_USES_QCOM_MM_AUDIO := true
+
     # Enable color metadata for modern UM targets
     ifneq ($(filter msm8996 msm8998 sdm660,$(TARGET_BOARD_PLATFORM)),)
         TARGET_USES_COLOR_METADATA := true
