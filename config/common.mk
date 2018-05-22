@@ -134,6 +134,11 @@ PRODUCT_PACKAGES += \
 # Candy OTA
 include vendor/candy/config/ota.mk
 
+# Extras
+PRODUCT_PACKAGES += \
+    MiXplorer \
+    ViaBrowser
+
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     Calculator \
