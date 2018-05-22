@@ -128,6 +128,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     AudioFX
 
+# Extras
+PRODUCT_PACKAGES += \
+    MiXplorer
+
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     Calculator \
@@ -135,7 +139,6 @@ PRODUCT_PACKAGES += \
     CandyWrappers \
     LatinIME \
     BluetoothExt
-
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
