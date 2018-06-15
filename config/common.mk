@@ -127,9 +127,9 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librsjni
 
-# AudioFX
+# MusicFX
 PRODUCT_PACKAGES += \
-    AudioFX
+    MisicFX
 
 # Candy OTA
 include vendor/candy/config/ota.mk
