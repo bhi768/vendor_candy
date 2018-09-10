@@ -20,6 +20,9 @@
     <string name="config_appsAuthorizedForSharedAccounts">;com.android.vending;com.android.settings;</string>
     <string name="config_persistentDataPackageName">com.google.android.gms</string>
 
+    <!-- IP address of the dns server to use if nobody else suggests one -->
+    <string name="config_default_dns_server" translatable="false">1.0.0.1</string>
+
     <!-- The duration (in milliseconds) of a short animation. -->
     <integer name="config_shortAnimTime">100</integer>
 
