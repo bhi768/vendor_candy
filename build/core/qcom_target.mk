@@ -111,7 +111,7 @@ $(call project-set-path,qcom-display,hardware/qcom/display-caf/$(QCOM_HARDWARE_V
 $(call project-set-path,qcom-media,hardware/qcom/media-caf/$(QCOM_HARDWARE_VARIANT))
 
 $(call set-device-specific-path,CAMERA,camera,hardware/qcom/camera)
-$(call set-device-specific-path,DATA_IPA_CFG_MGR,data-ipa-cfg-mgr,hardware/qcom/data/ipacfg-mgr)
+$(call set-device-specific-path,DATA_IPA_CFG_MGR,data-ipa-cfg-mgr,vendor/qcom/opensource/data-ipa-cfg-mgr)
 $(call set-device-specific-path,GPS,gps,hardware/qcom/gps)
 $(call set-device-specific-path,SENSORS,sensors,hardware/qcom/sensors)
 $(call set-device-specific-path,LOC_API,loc-api,vendor/qcom/opensource/location)
