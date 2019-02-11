@@ -112,6 +112,10 @@ PRODUCT_COPY_FILES += \
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
+# Required packages
+PRODUCT_PACKAGES += \
+    GboardGoPreb 
+
 # LatinIME gesture typing
 ifeq ($(TARGET_ARCH),arm64)
 PRODUCT_COPY_FILES += \
@@ -160,5 +164,10 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/candy/overlay/common
 
 # Google sounds
 include vendor/candy/google/GoogleAudio.mk
+
+# Some props that we need for the google stuff we're adding
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.com.google.ime.height_ratio=1.05 \
+    ro.com.google.ime.emoji_key=false
 
 $(call inherit-product-if-exists, vendor/extra/product.mk)
