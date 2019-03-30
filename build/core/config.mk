@@ -24,4 +24,4 @@ include $(TOPDIR)vendor/candy/build/core/mtk_target.mk
 # Rules for QCOM targets
 include $(TOPDIR)vendor/candy/build/core/qcom_target.mk
 
-BUILD_RRO_SYSTEM_PACKAGE := $(TOP)/vendor/candy/build/core/system_rro.mk
+BUILD_RRO_PACKAGE := $(TOP)/vendor/candy/build/core/system_rro.mk
