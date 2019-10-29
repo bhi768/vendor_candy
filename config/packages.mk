@@ -48,6 +48,10 @@ PRODUCT_PACKAGES += \
 # Device Personalization Services
 PRODUCT_PACKAGES += MatchmakerPrebuilt
 
+# Themes
+PRODUCT_PACKAGES += \
+    FontGoogleSansOverlay
+
 # Fonts
 PRODUCT_PACKAGES += \
     FontArbutusSourceOverlay \

@@ -94,6 +94,12 @@ PRODUCT_COPY_FILES += \
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
+# Fonts
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,vendor/candy/prebuilt/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
+    vendor/candy/prebuilt/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+
+
 # Sysconfigs
 PRODUCT_COPY_FILES += \
     vendor/candy/prebuilt/common/etc/sysconfig/candy-power-whitelist.xml:system/etc/sysconfig/candy-power-whitelist.xml \
